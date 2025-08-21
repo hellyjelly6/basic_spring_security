@@ -1,13 +1,16 @@
-package org.example.entry_points_authorization;
+package org.example.sandbox;
 
+import org.example.sandbox.service.JdbcUserDetailService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.function.RouterFunction;
 import org.springframework.web.servlet.function.ServerResponse;
+
+import javax.sql.DataSource;
 
 import static org.springframework.web.servlet.function.RouterFunctions.route;
 
@@ -16,6 +19,11 @@ public class SandBoxApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SandBoxApplication.class, args);
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService(DataSource dataSource){
+        return new JdbcUserDetailService(dataSource);
     }
 
     @Bean

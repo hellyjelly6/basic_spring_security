@@ -1,4 +1,4 @@
-package org.example.entry_points_authorization.controller;
+package org.example.sandbox.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.MediaType;
