@@ -21,22 +21,10 @@ public class SandBoxApplication {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/public/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(login -> login
-                        .loginPage("/public/sign-in.html")
-                        .loginProcessingUrl("/process-login")
-                        .defaultSuccessUrl("/", true)
-                        .permitAll()
-                )
-                .exceptionHandling(ex -> ex
-                        .authenticationEntryPoint((request, response, authException) -> {
-                            response.sendRedirect("http://localhost:8080/public/sign-in.html");
-                        })
-                )
+                .httpBasic(basic -> {})
                 .build();
     }
 
